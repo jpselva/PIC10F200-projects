@@ -1,6 +1,0 @@
-Warning[207] /home/jpselva/synced/Projetos/PIC/pwm-dim-reversed/pwm-dim-reversed.X/main.asm 4 : Found label after column 1. (count)
-Warning[207] /home/jpselva/synced/Projetos/PIC/pwm-dim-reversed/pwm-dim-reversed.X/main.asm 5 : Found label after column 1. (limit)
-Warning[207] /home/jpselva/synced/Projetos/PIC/pwm-dim-reversed/pwm-dim-reversed.X/main.asm 6 : Found label after column 1. (delay)
-Warning[207] /home/jpselva/synced/Projetos/PIC/pwm-dim-reversed/pwm-dim-reversed.X/main.asm 7 : Found label after column 1. (dir)
-Message[305] /home/jpselva/synced/Projetos/PIC/pwm-dim-reversed/pwm-dim-reversed.X/main.asm 50 : Using default destination of 1 (file).
-Warning[205] /home/jpselva/synced/Projetos/PIC/pwm-dim-reversed/pwm-dim-reversed.X/main.asm 54 : Found directive in column 1. (END)
