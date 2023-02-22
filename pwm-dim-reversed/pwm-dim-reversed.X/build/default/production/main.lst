@@ -1,0 +1,166 @@
+MPASM 5.87  /HOME/JPSELVA/SYNCED/PROJETOS/PI   9-6-2022  17:26:01         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 #include "p10f200.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Jan 06 2020
+                      00005 ;  MPASM PIC10F200 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2020 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00152         LIST
+                      00002  
+                      00003 ; registers
+Warning[207]: Found label after column 1. (count)
+  00000010            00004     count EQU 0x10
+Warning[207]: Found label after column 1. (limit)
+  00000011            00005     limit EQU 0x11
+Warning[207]: Found label after column 1. (delay)
+  00000012            00006     delay EQU 0x12
+Warning[207]: Found label after column 1. (dir)
+  00000013            00007     dir   EQU 0x13 ; 0 = dec, 255 = inc
+                      00008 
+                      00009 ; configuration
+0FFF   0FEB           00010     __CONFIG _WDT_OFF & _CP_OFF & _MCLRE_OFF
+                      00011     ORG 0x000
+                      00012 
+                      00013 ; use GP1 as input
+0000   0CFD           00014     MOVLW ~(1 << GP1)
+0001   0006           00015     TRIS GPIO
+                      00016     
+                      00017 ; main program
+0002   0073           00018     CLRF dir
+0003                  00019 LOOP
+0003   0CFF           00020     MOVLW 0xFF
+0004   0031           00021     MOVWF limit
+0005   0273           00022     COMF dir, F
+0006                  00023 DIM_LOOP
+0006   0CFF           00024     MOVLW 0xFF
+0007   0030           00025     MOVWF count
+0008   0733           00026     BTFSS dir, 1   ; skip if dir is increasing
+0009   0A??           00027     GOTO $ + 3
+000A   0526           00028     BSF GPIO, GP1  ; increasing -> start with 1
+000B   0A??           00029     GOTO PULSE_LOOP
+000C   0426           00030     BCF GPIO, GP1  ; decreasing -> start with 0
+000D                  00031 PULSE_LOOP 
+000D   0211           00032     MOVF limit, W
+000E   0090           00033     SUBWF count, W
+000F   0743           00034     BTFSS STATUS, Z  ; if count = limit,
+0010   0A??           00035     GOTO $ + 3
+0011   0C02           00036     MOVLW (1 << GP1) 
+0012   01A6           00037     XORWF GPIO, F    ; flip GP1
+0013   09??           00038     CALL DELAY
+0014   02F0           00039     DECFSZ count, F
+MPASM 5.87  /HOME/JPSELVA/SYNCED/PROJETOS/PI   9-6-2022  17:26:01         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0015   0A??           00040     GOTO PULSE_LOOP ; end PULSE_LOOP
+0016   02F1           00041     DECFSZ limit, F
+0017   0A??           00042     GOTO DIM_LOOP   ; end DIM_LOOP
+0018   0A??           00043     GOTO LOOP       ; end LOOP
+                      00044     
+                      00045 ; delay of ~5 us
+0019                  00046 DELAY
+0019   0C0A           00047     MOVLW d'10'
+001A   0032           00048     MOVWF delay
+001B                  00049 DELAY_LOOP
+Message[305]: Using default destination of 1 (file).
+001B   02F2           00050     DECFSZ delay
+001C   0A??           00051     GOTO DELAY_LOOP
+001D   0800           00052     RETLW 0
+                      00053 
+Warning[205]: Found directive in column 1. (END)
+0FEB                  00054 END
+MPASM 5.87  /HOME/JPSELVA/SYNCED/PROJETOS/PI   9-6-2022  17:26:01         PAGE  3
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C                                 00000000
+CAL0                              00000001
+CAL1                              00000002
+CAL2                              00000003
+CAL3                              00000004
+CAL4                              00000005
+CAL5                              00000006
+CAL6                              00000007
+DC                                00000001
+DELAY                             00000019
+DELAY_LOOP                        0000001B
+DIM_LOOP                          00000006
+F                                 00000001
+FOSC4                             00000000
+FSR                               00000004
+GP0                               00000000
+GP1                               00000001
+GP2                               00000002
+GP3                               00000003
+GPIO                              00000006
+GPWUF                             00000007
+INDF                              00000000
+LOOP                              00000003
+NOT_GPPU                          00000006
+NOT_GPWU                          00000007
+NOT_PD                            00000003
+NOT_TO                            00000004
+OSCCAL                            00000005
+PCL                               00000002
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PULSE_LOOP                        0000000D
+STATUS                            00000003
+T0CS                              00000005
+T0SE                              00000004
+TMR0                              00000001
+TRISIO0                           00000000
+TRISIO1                           00000001
+TRISIO2                           00000002
+TRISIO3                           00000003
+W                                 00000000
+Z                                 00000002
+_.org_0_0009                      00000009
+_.org_0_0010                      00000010
+_CONFIG                           00000FFF
+_CP_OFF                           00000FFF
+_CP_ON                            00000FF7
+_IDLOC0                           00000100
+_IDLOC1                           00000101
+_IDLOC2                           00000102
+_IDLOC3                           00000103
+MPASM 5.87  /HOME/JPSELVA/SYNCED/PROJETOS/PI   9-6-2022  17:26:01         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_IntRC_OSC                        00000FFF
+_MCLRE_OFF                        00000FEF
+_MCLRE_ON                         00000FFF
+_OSC_IntRC                        00000FFF
+_WDTE_OFF                         00000FFB
+_WDTE_ON                          00000FFF
+_WDT_OFF                          00000FFB
+_WDT_ON                           00000FFF
+__10F200                          00000001
+count                             00000010
+delay                             00000012
+dir                               00000013
+limit                             00000011
+
+Errors   :     0
+Warnings :     5 reported,     0 suppressed
+Messages :     1 reported,     0 suppressed
+
+

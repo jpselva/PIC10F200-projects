@@ -1,0 +1,5 @@
+Warning[207] /home/jpsb/synced/Projetos/PIC/pwm-dim/pwm-dim.X/main.asm 4 : Found label after column 1. (count)
+Warning[207] /home/jpsb/synced/Projetos/PIC/pwm-dim/pwm-dim.X/main.asm 5 : Found label after column 1. (limit)
+Warning[207] /home/jpsb/synced/Projetos/PIC/pwm-dim/pwm-dim.X/main.asm 6 : Found label after column 1. (delay)
+Message[305] /home/jpsb/synced/Projetos/PIC/pwm-dim/pwm-dim.X/main.asm 41 : Using default destination of 1 (file).
+Warning[205] /home/jpsb/synced/Projetos/PIC/pwm-dim/pwm-dim.X/main.asm 45 : Found directive in column 1. (END)
